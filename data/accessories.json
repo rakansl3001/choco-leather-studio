@@ -1,0 +1,24 @@
+{
+  "version": "2026-09-10",
+  "atelier": "Choco Leather",
+  "atelierAr": "شوكو ليذر",
+  "currency": "SAR",
+  "policy": {
+    "ar": "صورتان أساسيتان وعلامة ورقة الكاكاو الهادئة مشمولتان مع كل صندوق وكل حقيبة. التاق الجلد، والبروش المشغول، والمسكات، والسيور، والعيون المعدنية، وحلقات التثبيت، والصينية إضافات يختارها العميل مقابل مبلغ يُثبَّت لاحقاً. لا يُختلق سعر بالريال حتى يعتمد الأتيليه الرقم.",
+    "whyAr": "المجاني يحفظ هوية البيت على كل قطعة. المدفوع شغل يدوي أو معدن أو جلد إضافي لا يدخل في كلفة الصندوق الأساسية."
+  },
+  "items": [
+    {"id":"acc-brooch-free","group":"brooch","tier":"included","priceLabel":"مشمول","nameAr":"بروش ورقة الكاكاو — التصميم الهادئ","shortAr":"ختم ناعم أو طباعة هادئة.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"],"options":[{"id":"quiet-stamp","labelAr":"ختم ناعم"}]},
+    {"id":"acc-brooch-paid","group":"brooch","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"بروش ورقة الكاكاو المشغول","shortAr":"ورقة معدن مشغولة. تصميم مدفوع بجانب العلامة المجانية.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"],"options":[{"id":"gold","labelAr":"ذهب شمبانيا"}]},
+    {"id":"acc-leather-tag","group":"tag","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"تاق الجلد CL","shortAr":"بطاقة جلد طبيعي بحروف البيت.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-leather-laces","group":"laces","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"سيور وأشرطة الجلد","shortAr":"جملي، بني، قهوة غامقة، أسود.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-bag-strap","group":"straps","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"مسكة حقيبة / حزام","shortAr":"للحقيبة أو الصندوق الكبير.","appliesTo":["bag","pouch","trunk","majlis"]},
+    {"id":"acc-eyelets","group":"eyelets","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"عيون معدنية","shortAr":"10مم داخل / 17مم شفة.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-screw-rings","group":"rings","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"حلقات تثبيت لولبية","shortAr":"لتعليق التاق أو الشرابة.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-leather-tray","group":"tray","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"صينية جلد 20سم","shortAr":"الضلع الداخلي 13سم.","appliesTo":["majlis","hiba","trunk"]},
+    {"id":"acc-tassel","group":"tassel","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"شرابة جلد","shortAr":"تُعلَّق بالحلقة أو التاق.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-wax-seal","group":"seal","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"ختم شمع CL","shortAr":"على الورق المريمي أو خيط التاق.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","bag","pouch","trunk"]},
+    {"id":"acc-clasp","group":"clasp","tier":"paid","priceLabel":"بفلوس — TBD ريال","nameAr":"قفل / إبزيم معدن","shortAr":"للصناديق وصناديق السفر.","appliesTo":["naqra","mithaq","majlis","hiba","uns","namaa","trunk"]}
+  ],
+  "imageLibrary": []
+}
