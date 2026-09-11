@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CHOCO LEATHER — استوديو الخيارات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--sage:#3F5344;--saddle:#8B5A3C;--gold:#C4A35A;--ivory:#F4EFE6;--ivory2:#F6F1E8;--choc:#2A221C;--line:rgba(42,34,28,.14)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--ivory);color:var(--choc);font-family:"IBM Plex Sans Arabic",sans-serif}
+.wrap{display:grid;grid-template-columns:260px 1fr 280px;min-height:100vh}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}}
+.side,.ticket{background:var(--ivory2);padding:24px 18px}
+.side{border-inline-end:1px solid var(--line)}
+.ticket{border-inline-start:1px solid var(--line)}
+.mark{font-family:"Cormorant Garamond",serif;letter-spacing:.18em;font-size:13px;color:var(--sage)}
+.mark small{display:block;margin-top:6px;color:var(--saddle);font-size:11px}
+h1{font-size:20px;font-weight:500}
+.lede{font-size:13px;line-height:1.8;color:rgba(42,34,28,.75)}
+.nav-sec button{display:block;width:100%;text-align:right;background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 10px;margin:4px 0;cursor:pointer;font:inherit}
+.nav-sec button[aria-current="true"]{background:#fff;border-color:var(--line)}
+.nav-sec span{display:block;font-size:11px;color:rgba(42,34,28,.5)}
+main{padding:24px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:14px}
+select,.ghost{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit}
+.ghost{cursor:pointer}
+.policy{background:#fff;border:1px solid var(--line);border-right:3px solid var(--gold);border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;line-height:1.8}
+.stage{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}
+.viewer{position:relative;height:380px;background:#f3eee6;display:grid;place-items:center}
+.viewer img.main{max-width:100%;max-height:380px;object-fit:contain;cursor:zoom-in}
+.arrows{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:10px;pointer-events:none}
+.arrows button{pointer-events:all;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(244,239,230,.93);cursor:pointer}
+.cap{padding:12px 16px;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.badge{display:inline-block;font-size:11px;border-radius:999px;padding:3px 8px}
+.inc{background:rgba(63,83,68,.12);color:var(--sage)}
+.pay{background:rgba(139,90,60,.14);color:var(--saddle)}
+.add{margin-top:8px;width:100%;border:1px solid var(--line);background:var(--ivory);border-radius:10px;padding:8px;cursor:pointer;font:inherit}
+.add.on{background:var(--sage);color:var(--ivory)}
+.ticket li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0;list-style:none;font-size:13px}
+.ticket ul{padding:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside class="side">
+<div class="mark">CHOCO LEATHER<small>شوكولاتة بلجيكية · جلد طبيعي</small></div>
+<h1>استوديو الخيارات</h1>
+<p class="lede">اختر القطعة والقسم، ثم أضف الإكسسوار كخيار إضافي.</p>
+<div class="nav-sec" id="secNav"></div>
+</aside>
+<main>
+<div class="toolbar">
+<label>القطعة<br><select id="productSel"></select></label>
+</div>
+<div class="policy" id="policy"></div>
+<section class="stage">
+<div class="viewer" id="viewer"><div class="empty">اختر قسماً</div>
+<div class="arrows"><button type="button" id="prevBtn">›</button><button type="button" id="nextBtn">‹</button></div></div>
+<div class="cap"><h2 id="capTitle">—</h2><p id="capNote"></p></div>
+</section>
+<div class="grid" id="cards"></div>
+</main>
+<aside class="ticket"><h2>طلب هذه القطعة</h2><p class="lede" id="ticketStory"></p><ul id="ticketList"></ul><div id="ticketSum"></div></aside>
+</div>
+<script>
+const state={accessories:null,products:null,productId:"naqra",section:"brooch",index:0,chosen:{}};
+const SECTIONS=[{id:"laces",title:"سيور الجلد"},{id:"straps",title:"مسكات وأحزمة"},{id:"eyelets",title:"العيون المعدنية"},{id:"rings",title:"حلقات التثبيت"},{id:"tray",title:"صينية الجلد"},{id:"tag",title:"تاق الجلد"},{id:"brooch",title:"البروش"},{id:"tassel",title:"الشرابة"},{id:"seal",title:"ختم الشمع"},{id:"clasp",title:"القفل"}];
+const $=id=>document.getElementById(id);
+async function boot(){
+  const [acc,prods]=await Promise.all([
+    fetch("data/accessories.json").then(r=>r.json()),
+    fetch("data/products.json").then(r=>r.json())
+  ]);
+  state.accessories=acc; state.products=prods;
+  $("policy").innerHTML="<strong>تصريح الأتيليه.</strong> "+acc.policy.ar+"<div>وليش؟ "+acc.policy.whyAr+"</div>";
+  $("productSel").innerHTML=prods.products.map(p=>`<option value="${p.id}">${p.nameAr} — ${p.nameEn}</option>`).join("");
+  $("productSel").onchange=()=>{state.productId=$("productSel").value;renderAll();};
+  $("secNav").innerHTML=SECTIONS.map(s=>`<button type="button" data-sec="${s.id}">${s.title}</button>`).join("");
+  $("secNav").onclick=e=>{const b=e.target.closest("button");if(!b)return;state.section=b.dataset.sec;renderAll();};
+  renderAll();
+}
+function renderAll(){
+  const p=state.products.products.find(x=>x.id===state.productId);
+  $("secNav").querySelectorAll("button").forEach(b=>b.setAttribute("aria-current",b.dataset.sec===state.section?"true":"false"));
+  $("capTitle").textContent=SECTIONS.find(s=>s.id===state.section).title;
+  $("ticketStory").textContent=p.story;
+  const items=state.accessories.items.filter(i=>i.group===state.section&&i.appliesTo.includes(p.id));
+  const included=state.accessories.items.filter(i=>i.tier==="included"&&i.appliesTo.includes(p.id));
+  $("cards").innerHTML=items.length?items.map(item=>{
+    const locked=item.tier==="included"; const k=p.id+":"+item.id; const on=!!state.chosen[k];
+    return `<article class="card"><span class="badge ${locked?"inc":"pay"}">${item.priceLabel}</span><h3>${item.nameAr}</h3><p>${item.shortAr}</p><button class="add ${on||locked?"on":""}" data-id="${item.id}" ${locked?"disabled":""}>${locked?"مشمول تلقائياً":on?"مضاف":"أضف كخيار إضافي"}</button></article>`;
+  }).join(""):"<div class='card'>هذا القسم لا ينطبق على هذه القطعة.</div>";
+  $("cards").onclick=e=>{const b=e.target.closest(".add");if(!b||b.disabled)return;const item=state.accessories.items.find(i=>i.id===b.dataset.id);const k=p.id+":"+item.id;if(state.chosen[k])delete state.chosen[k];else state.chosen[k]=item;renderAll();};
+  const extras=Object.values(state.chosen).filter(i=>i.appliesTo.includes(p.id));
+  $("ticketList").innerHTML=[...included.map(i=>`<li><strong>${i.nameAr}</strong><br>مشمول</li>`),...extras.map(i=>`<li><strong>${i.nameAr}</strong><br>${i.priceLabel}</li>`)].join("");
+  $("ticketSum").textContent="الإضافات: "+extras.length+" — السعر TBD ريال";
+}
+boot().catch(err=>{$("policy").textContent="تعذّر التحميل: "+err.message;});
+</script>
+</body></html>

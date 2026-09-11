@@ -1,0 +1,16 @@
+{
+  "version": "2026-09-10",
+  "sharedAccessoriesFile": "data/accessories.json",
+  "rule": "كل ملف منتج يحقن نفس قائمة الإكسسوارات ويُصفّي فقط حسب appliesTo. لا قائمة ثانية.",
+  "products": [
+    {"id": "naqra", "nameAr": "نقرة", "nameEn": "Naqra", "kind": "box", "story": "صندوق راحة الكف. يُفتح بنقرة واحدة.", "file": "data/products/naqra.json"},
+    {"id": "mithaq", "nameAr": "ميثاق", "nameEn": "Mithaq", "kind": "box", "story": "بين يدين. هدية اثنين.", "file": "data/products/mithaq.json"},
+    {"id": "majlis", "nameAr": "مجلس", "nameEn": "Majlis", "kind": "tray-chest", "story": "مقياس صينية المجلس.", "file": "data/products/majlis.json"},
+    {"id": "hiba", "nameAr": "هبة", "nameEn": "Hiba", "kind": "box", "story": "هدية واحدة أوفى من نقرة.", "file": "data/products/hiba.json"},
+    {"id": "uns", "nameAr": "أنس", "nameEn": "Uns", "kind": "box", "story": "نِسَب أهدأ من ميثاق.", "file": "data/products/uns.json"},
+    {"id": "namaa", "nameAr": "نماء", "nameEn": "Namaa", "kind": "box", "story": "قريب من نقرة، حقل عاجي أنعم.", "file": "data/products/namaa.json"},
+    {"id": "bag", "nameAr": "حقيبة الأتيليه", "nameEn": "Atelier bag", "kind": "bag", "story": "حقيبة جلد تستقبل المسكة والعيون.", "file": "data/products/bag.json"},
+    {"id": "pouch", "nameAr": "كيس جلد", "nameEn": "Leather pouch", "kind": "pouch", "story": "كيس صغير للمرافقة.", "file": "data/products/pouch.json"},
+    {"id": "trunk", "nameAr": "صندوق سفر", "nameEn": "Voyage trunk", "kind": "trunk", "story": "صندوق سفر صغير بمقياس المجلس.", "file": "data/products/trunk.json"}
+  ]
+}
